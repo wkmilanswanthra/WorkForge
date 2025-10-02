@@ -5,15 +5,13 @@ spring:
     name: gateway
   cloud:
     gateway:
-      routes:
-        - id: project-service
-          uri: lb://project-service
-          predicates:
-            - Path=/api/projects/**,/api/tasks/**
-          filters:
-            - StripPrefix=1
-      default-filters:
-        - PreserveHostHeader
+      server:
+        webmvc:
+          routes:
+            - id: project-service
+              uri: lb://project
+              predicates:
+                - Path=/api/projects/**,/api/tasks/**
 
 management:
   endpoints:
